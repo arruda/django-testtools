@@ -2,3 +2,9 @@ bin/
 include/
 lib/
 share/
+dist/
+build/
+*.pyc
+*.pyo
+*.swp
+*.swo
