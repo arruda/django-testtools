@@ -25,15 +25,6 @@ class TestCase(test.TestCase):
 
             return error_message
 
-    def assertTemplateUsed(self, response, template_name):
-        super(TestCase, self).assertTemplateUsed(response, template_name)
-        self.longMessage = False
-        self.assertIn('MEDIA_URL', response.context)
-        self.assertEqual(response.context['MEDIA_URL'], settings.MEDIA_URL)
-        self.assertIn('STATIC_URL', response.context)
-        self.assertEqual(response.context['STATIC_URL'], settings.STATIC_URL)
-        self.assertNotIn(settings.TEMPLATE_STRING_IF_INVALID, response.content, self.__clean_template_output(response))
-
     def assertErrorsInForm(self, form, *args, **kwargs):
         """
         Assert that form only has *args errors.

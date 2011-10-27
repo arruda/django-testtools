@@ -16,9 +16,6 @@ Test is the correct template is used and it does not have any context error in i
 ##```assertErrorsInForm(self, form, *args, **kwargs)```
 Assert that form only has `*args` errors.  If `validate=True` in `**kwargs`, call `form.is_valid()`
 
-##```assertQuerySetEqual(self, qs1, qs2, *args, **kwargs)```
-Assert the content returned by two queryset objects
-
 ##```assertRecipients(self, email, recipients)```
 Test if the email has the corrects recipients
 
@@ -38,12 +35,6 @@ Here we have a `TestCase` using each one of these methods:
         def test_errors_in_form(self):
             form = YourForm()
             self.assertErrorsInForm(forms, 'field_1', 'field_2', validate=True)
-
-        def test_queryset_equal(self):
-            response = self.client.get('send_mail_url_name')
-            qs1 = response.context['your_queryset_obj']
-            qs2 = YourModel.objects.all()
-            self.assertQuerySetEqual(qs1, qs2)
 
         def test_email_recipients(self):
             self.client.get('send_mail_url_name')
