@@ -1,88 +1,18 @@
-# Houston, we've got a problem! Tests aren't well written...
-
-Forget about this problem. **django-testtools** is a tool that helps you to write better test code. It gives you new assertions and a new test client that handle url resolution for you.
-
 #Installing
 
     $ pip install django-extensions
 
-# Assertion methods:
-
-**django-testtools** has a few new assertion methods that helps you abstracting some commom lines of code. They are:
-
-##```assertTemplateUsed(self, response)```
-Test is the correct template is used and it does not have any context error in it
-
-##```assertErrorsInForm(self, form, *args, **kwargs)```
-Assert that form only has `*args` errors.  If `validate=True` in `**kwargs`, call `form.is_valid()`
-
-##```assertRecipients(self, email, recipients)```
-Test if the email has the corrects recipients
-
-##Examples
-
-Here we have a `TestCase` using each one of these methods:
-
-    from django.core import mail
-    from django_testtools import TestCase
-
-    class YourTestCaseClass(TestCase):
-
-        def test_template_used(TestCase):
-            response = self.client.get('your_url_name')
-            self.assertTemplateUsed(response, 'template_name.html')
-
-        def test_errors_in_form(self):
-            form = YourForm()
-            self.assertErrorsInForm(forms, 'field_1', 'field_2', validate=True)
-
-        def test_email_recipients(self):
-            self.client.get('send_mail_url_name')
-            self.assertRecipients(mail.outbox[0], ['your_email@example.com'])
-
-
-#ReverserClient
-
-**django-testtools** uses a custom `TestClient` which is the `ReverserClient`. The `ReverserClient` handles for you the resolution of named urls at your tests so you don't need a call to the `django.core.urlresolvers.reverse` method at every test method . This client does this "magic" at his get and post methods. Here we can se an example showing the old way and the new way to do this:
-
-    class YourTestCaseClass(TestCase):
-
-        # OLD GET STYLE
-        def test_old_get_function(self):
-            response = self.client.get(reverse('your_url_name'))
-            self.assertEqual(response.status_code, 200)
-
-        # NEW GET STYLE
-        def test_new_get_function(self):
-            response = self.client.get('your_url_name')
-            self.assertEqual(response.status_code, 200)
-
-        # OLD POST STYLE
-        def test_old_post_function(self):
-            response = self.client.post(reverse('your_url_name'), {'your_key': 'post_value'})
-            self.assertEqual(response.status_code, 200)
-
-        # NEW POST STYLE
-        def test_new_post_function(self):
-            response = self.client.post('your_url_name', {'your_key': 'post_value'})
-            self.assertEqual(response.status_code, 200)
-
-
-If you want to keed your TestCases but wants to have the power of the `ReverserClient` you can do this! To do it, you just need to ovewrite the `TestClient` of your specif `TestCase` such as the following example:
-
-    from django.test import TestCase
-
-    from django_testtools import ReverserClient
-
-    class YourPreciousTestCase(TestCase):
-        client_class = ReverserClient
-
-        ###YOUR TEST METHODS HERE
-
 # How to contribute?
-TODO
 
-## Any question or suggestion?
+1 - Fork it!
 
-Mail us: contato **at** dekode **dot** com **dot** br
+2 - Clone **your** repo.
 
+    $ git clone git://github.com/YOUR_ACCOUNT/django-testtools.git
+
+3 - Setup your development environment.
+
+    $ cd django_testtools
+    $ python bootstrap/bootstrap2.7.py
+
+4 - Hack and make pull requests.
