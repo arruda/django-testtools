@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='django-testtools',
     version='0.1',
-    author='Dekode',
-    author_email='contato@dekode.com.br',
+    author='Bernardo Fontes',
+    author_email='falecomigo@bernardofontes.net',
     url='http://github.com/dekode/django-testtools',
 
     packages=['django_testtools'],
