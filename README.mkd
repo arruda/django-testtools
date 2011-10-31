@@ -1,6 +1,6 @@
 #Installing
 
-    $ pip install django-extensions
+    $ pip install django-testtools
 
 # How to contribute?
 
